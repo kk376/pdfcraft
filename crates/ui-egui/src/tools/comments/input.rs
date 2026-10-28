@@ -286,6 +286,7 @@ fn select_input(
         && on_page
         && cx.allowed
         && let Some(a) = pointer.and_then(|p| cx.hit(p))
+        && !a.locked_contents
     {
         cv.selected = Some((cx.page, a.index));
         cv.composer = Some(Composer {
