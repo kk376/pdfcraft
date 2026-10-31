@@ -84,6 +84,7 @@ fn listed(page: usize, index: usize, contents: &str, parent: Option<(usize, usiz
         state: None,
         quads: Vec::new(),
         locked: false,
+        locked_contents: false,
         intent: None,
         fill_sign: false,
         no_rotate: false,
@@ -453,7 +454,7 @@ fn context_menu_disables_edit_text_when_locked_contents_is_set() {
     let mut h = egui_kittest::Harness::new_ui_state(
         |ui, (view, actions): &mut (DocView, Vec<CanvasAction>)| {
             ui.button("Page").context_menu(|ui| {
-                if let Some(a) = context_menu(ui, view, &info, &prefs, true, true) {
+                if let Some(a) = context_menu(ui, view, &info, &|_, _| true, &prefs, true, true) {
                     actions.push(a);
                 }
             });
